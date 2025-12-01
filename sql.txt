@@ -1,0 +1,4 @@
+CREATE DATABASE ProjetoDS
+    DEFAULT CHARACTER SET = 'utf8mb4';
+USE ProjetoDS;
+CREATE TABLE cadastro(id int AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(45) NOT NULL, email VARCHAR(100) not NULL, senha VARCHAR(8) not NULL, confirmar VARCHAR(8) not NULL, telefone VARCHAR(14) not NULL);

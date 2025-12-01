@@ -1,6 +1,6 @@
 db_config={
     'host': 'localhost',
-    'user': 'root',    
-    'password': '', 
+    'user': 'vinicius',    
+    'password': 'PedroLemes', 
     'database': 'ProjetoDS'
 }

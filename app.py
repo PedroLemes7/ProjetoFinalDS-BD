@@ -4,13 +4,13 @@ from model import Cadastro
 app = Flask(__name__)
 
 # Rota principal (Read - Listar todos)
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
     cadastro = Cadastro.buscar_todos()
     return render_template('cadastro.html', cadastro=cadastro)
 
 # Rota para exibir o formulário de novo cadastro
-@app.route('/novo')
+@app.route('/novo', methods=['POST', 'GET'])
 def novo():
     return render_template('cadastro.html', cadastro=None)
 
@@ -18,11 +18,14 @@ def novo():
 @app.route('/salvar', methods=['POST'])
 def salvar():
     nome = request.form['nome']
-    descricao = request.form['descricao']
-    preco = request.form['preco']
-    cadastro =  Cadastro(nome=nome, descricao=descricao, preco=preco)
+    email = request.form['email']
+    senha = request.form['senha']
+    telefone = request.form['telefone']
+    cadastro =  Cadastro(nome=nome, email=email, senha=senha, telefone=telefone)
     cadastro.salvar()
-    return redirect(url_for('index'))
+    """  return redirect(url_for('index')) """
+    return cadastro
+
 
 # Rota para exibir o formulário de edição (preenche com dados)
 @app.route('/editar/<int:id>')
@@ -34,9 +37,10 @@ def editar(id):
 @app.route('/atualizar/<int:id>', methods=['POST'])
 def atualizar(id):
     nome = request.form['nome']
-    descricao = request.form['descricao']
-    preco = request.form['preco']
-    cadastro = Cadastro(id=id, nome=nome, descricao=descricao, preco=preco)
+    email = request.form['email']
+    senha = request.form['senha']
+    telefone = request.form['telefone']
+    cadastro = Cadastro(id=id, nome=nome, email=email, senha=senha,telefone=telefone)
     cadastro.salvar() # O método salvar já lida com a atualização se o ID existir
     return redirect(url_for('index'))
 
@@ -47,4 +51,4 @@ def deletar(id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5000,debug=False)
+    app.run(host='0.0.0.0',port=5000,debug=True)
